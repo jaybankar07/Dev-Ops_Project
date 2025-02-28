@@ -1,0 +1,16 @@
+First Create a empty repo in GitHub & copy link !!
+
+Step 1 : Create a folder on Desktop with files in it.
+step 2 : open that folder in terminal by left clicking on it and then open in terminal
+step 3 : add this cmd
+git init
+git remote add origin "your repo link"
+check your repo is correctly added or not : git remote -v
+
+git checkout -b JJ-JIRA
+
+git add .
+git commit -m "Added a new feature"
+git push origin JJ-JIRA
+
+Now check your github repo there is one pull request !!
