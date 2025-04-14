@@ -1,0 +1,16 @@
+Assignment02
+
+1. Find issues due between specific dates
+
+1) Write a JQL query to find all issues that are due between *March 1st, 2025* and *March 15th, 2025*.
+: due >= "2025-03-01" AND due <= "2025-03-15"
+
+2. Find issues in multiple statuses:
+
+1) Write a JQL query to find all issues that are currently in either of the following statuses: "To Do", "In Progress", or "In Review"
+: status in ("To Do", "In Progress")
+
+3. Find issues with a specific status:
+
+1) Write a JQL query to find all issues that are in the status *"In Progress"*.
+: status = "In Progress"
