@@ -1,0 +1,16 @@
+Assignment03
+
+1. Status Transition Query:
+
+Write a JQL query to find all issues where the status changed from "In Progress" to “Done"after a specific date (e.g., March 1, 2024). Your query should be flexible enough to allow changes in the date parameter.
+: status CHANGED FROM "In Progress" TO "Done" AFTER "2024-03-01"
+
+2. Keyword Search Query:
+
+Write a JQL query to find issues that contain a specified keyword (e.g., "bug fix") in the Summary, Description, or Comments. The query should be adaptable to different keywords.
+: text ~ "bug fix"
+
+3. Completed Issues Query:
+
+Write a JQL query to list all issues where the status was "Done" for the current assignee during the last month. Ensure that the query dynamically calculates the last month’s timeframe rather than using fixed dates.
+: status CHANGED FROM "In Progress" TO "Done" AFTER "2024-03-01" AND assignee =
