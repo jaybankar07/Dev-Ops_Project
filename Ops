@@ -1,0 +1,309 @@
+Perfect! Here is the **step-by-step solution for all the sets (Set 1 to Set 8)** as per your practical exam document.
+
+---
+
+### **Set 1**
+
+**Q1. Git Scenario – Project Initialization**
+
+```bash
+cd InvoiceApp
+git init
+git remote add origin https://github.com/yourusername/InvoiceApp.git
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+```
+
+**Q2. JQL Advanced Search**
+
+a. Issues created in last 10 days and unresolved:
+```sql
+created >= -10d AND resolution = EMPTY
+```
+
+b. Issues due in next 3 days:
+```sql
+due <= 3d
+```
+
+c. Bugs resolved in last 5 days:
+```sql
+issuetype = Bug AND resolutiondate >= -5d
+```
+
+**Difference**:  
+- `resolution = EMPTY` means issue is open  
+- `status != Done` may still include resolved issues in other statuses  
+
+---
+
+### **Set 2**
+
+**Q1. GitHub – Team Collaboration**
+
+Steps:
+1. Create a new repo on GitHub.
+2. Clone it:
+   ```bash
+   git clone https://github.com/yourusername/project.git
+   cd project
+   echo "# Project Title" > README.md
+   git add README.md
+   git commit -m "Add README"
+   git push
+   ```
+3. Go to repo > Settings > Manage Access > Invite collaborators.
+4. Set up branch protection (Settings > Branches > Add rule for `main`) – require pull request approvals.
+
+**Q2. JQL Search**
+
+a. Status changed from "To Do" to "In Progress" in last 7 days:
+```sql
+status CHANGED FROM "To Do" TO "In Progress" AFTER -7d
+```
+
+b. Issues assigned to you and overdue:
+```sql
+assignee = currentUser() AND duedate < now()
+```
+
+c. Tasks transitioned to Done in last 2 days:
+```sql
+issuetype = Task AND status CHANGED TO Done AFTER -2d
+```
+
+**CHANGED keyword** tracks issue status transitions (workflow history).
+
+---
+
+### **Set 3**
+
+**Q1. Git – Branching & PR**
+
+```bash
+git checkout -b search-feature
+# make changes
+git add .
+git commit -m "Add search feature"
+git push origin search-feature
+```
+
+Then on GitHub:
+- Open a Pull Request
+- Assign reviewer
+- After approval:
+```bash
+git checkout main
+git pull
+git merge search-feature
+git push
+```
+
+**Q2. JQL Filters**
+
+a. Created between March 1 and 10, 2025:
+```sql
+created >= "2025-03-01" AND created <= "2025-03-10"
+```
+
+b. Updated within last 3 days:
+```sql
+updated >= -3d
+```
+
+c. Transitioned from In Progress to Testing after April 1, 2025:
+```sql
+status CHANGED FROM "In Progress" TO "Testing" AFTER "2025-04-01"
+```
+
+**Use**:
+- `updated >= -3d`: when you want changes in any field
+- `created >= -3d`: when you want new issues only
+
+---
+
+### **Set 4**
+
+**Q1. Git – Merge Conflict Resolution**
+
+1. Merge branch:
+   ```bash
+   git merge branch-name
+   ```
+2. Conflict will show in terminal and in the file with:
+   ```
+   <<<<<<< HEAD
+   Your code
+   =======
+   Teammate's code
+   >>>>>>> branch-name
+   ```
+
+3. Manually resolve the code, then:
+   ```bash
+   git add conflicted-file
+   git commit
+   ```
+
+**Q2. JQL**
+
+a. Frontend component and unresolved:
+```sql
+component = Frontend AND resolution = EMPTY
+```
+
+b. Labeled urgent or production-fix:
+```sql
+labels in (urgent, production-fix)
+```
+
+c. Current sprint and assigned to your team:
+```sql
+sprint in openSprints() AND assignee in membersOf("team-name")
+```
+
+**Labels vs Components**:
+- **Labels**: flexible tagging
+- **Components**: structured module-level division
+
+---
+
+### **Set 5**
+
+(Same Q1 as Set 2)
+
+**Q1. GitHub – Team Collaboration**  
+(See Set 2 Q1 above)
+
+**Q2. JQL – Release Readiness**
+
+a. Issues for v2.0:
+```sql
+fixVersion = "v2.0"
+```
+
+b. Bugs in v2.0 unresolved:
+```sql
+fixVersion = "v2.0" AND issuetype = Bug AND resolution = EMPTY
+```
+
+c. Tasks in v2.0 resolved in last 7 days:
+```sql
+fixVersion = "v2.0" AND issuetype = Task AND resolutiondate >= -7d
+```
+
+**Why fixVersion**: Useful to group and track features, tasks, and bugs planned for a particular release.
+
+---
+
+### **Set 6**
+
+**Q1. Git – Tag and Release**
+
+```bash
+git tag v1.0
+git push origin v1.0
+```
+
+Then:
+- Go to GitHub > Releases > New Release
+- Select tag `v1.0`, add description, and publish
+
+**Q2. JQL – SLA Queries**
+
+a. Overdue > 2 days:
+```sql
+duedate <= -2d
+```
+
+b. Must be resolved within 48 hours (using SLA label):
+```sql
+labels = SLA-48h AND resolution = EMPTY
+```
+
+c. Due this week:
+```sql
+duedate >= startOfWeek() AND duedate <= endOfWeek()
+```
+
+**SLA enforcement**: JQL lets teams monitor time-based service delivery.
+
+---
+
+### **Set 7**
+
+**Q1. Jira – Scrum Setup**
+
+Steps:
+1. Click “Create Project” > Scrum > Give name
+2. Go to Project > Create Board
+3. Add backlog items (Click "Create Issue")
+4. Click “Start Sprint” to begin and manage sprints
+
+**Q2. JQL**
+
+a. Unresolved tasks for Team-A:
+```sql
+team = "Team-A" AND issuetype = Task AND resolution = EMPTY
+```
+
+b. Issues in Blocked > 2 days:
+```sql
+status = Blocked AND status CHANGED TO Blocked BEFORE -2d
+```
+
+c. Bugs assigned to you and in Review:
+```sql
+issuetype = Bug AND assignee = currentUser() AND status = "In Review"
+```
+
+**Why team-level filters**: Help focus dashboards on team-specific workloads and blockers.
+
+---
+
+### **Set 8**
+
+**Q1. GitHub – Fork & Contribute**
+
+1. Go to repo > Click “Fork”
+2. Clone your fork:
+   ```bash
+   git clone https://github.com/yourusername/project.git
+   ```
+3. Create branch and push:
+   ```bash
+   git checkout -b feature-branch
+   # make changes
+   git add .
+   git commit -m "Feature added"
+   git push origin feature-branch
+   ```
+
+4. Open PR on original repo.
+
+**Q2. JQL – Time-Sensitive Filters**
+
+a. Created this week:
+```sql
+created >= startOfWeek()
+```
+
+b. Resolved in previous quarter:
+```sql
+resolutiondate >= startOfQuarter(-1) AND resolutiondate <= endOfQuarter(-1)
+```
+
+c. Unresolved, due in next 7 days, assigned to team:
+```sql
+duedate <= 7d AND resolution = EMPTY AND assignee in membersOf("your-team")
+```
+
+**Explanation**:
+- `startOfWeek()`: Monday of current week
+- `startOfQuarter(-1)`: previous quarter start
+- `<= 7d`: upcoming 7 days
+
+---
+
+Let me know if you need **screenshots or help preparing the Word file** for submission!
